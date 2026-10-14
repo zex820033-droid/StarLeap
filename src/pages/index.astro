@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import ProductScreen from '../components/ProductScreen.astro';
 import generalScreen from '../assets/product/general-mode-starleap-6c1e201d.png';
 import customerScreen from '../assets/product/customer-records-starleap-c53b8774.png';
@@ -20,6 +20,10 @@ import salesScenario from '../assets/editorial/sales-scenario.png';
 import salesChallenges from '../assets/editorial/sales-challenges.png';
 import experienceMap from '../assets/editorial/experience-map.png';
 import { site } from '../content/site';
+
+// Full-size preview opens the largest optimised WebP instead of the source PNG,
+// so the original multi-megabyte files stay out of the published bundle.
+const heroPreview = await getImage({ src: conversationScreen, format: 'webp', width: 1220, quality: 90 });
 ---
 <Layout>
   <header class="site-header">
@@ -44,8 +48,8 @@ import { site } from '../content/site';
           </div>
         </div>
           <div class="hero-product-stage"><figure class="hero-product">
-            <div class="product-frame-heading"><span>{site.hero.previewTitle}</span><a href={conversationScreen.src} data-image-preview={site.hero.compactCaption}>{site.hero.originalImage}<Arrow /></a></div>
-            <div class="product-mat"><div class="product-viewport"><a class="image-preview-trigger" href={conversationScreen.src} data-image-preview={site.hero.compactCaption} aria-label={site.hero.compactCaption + "，" + site.editorial.viewLarge}><Image src={conversationScreen} alt={site.hero.screenshotAlt} format="webp" quality={90} widths={[640, 960, 1220]} sizes="(max-width: 800px) 90vw, 846px" fetchpriority="high" loading="eager" /></a></div></div>
+            <div class="product-frame-heading"><span>{site.hero.previewTitle}</span><a href={heroPreview.src} data-image-preview={site.hero.compactCaption}>{site.hero.originalImage}<Arrow /></a></div>
+            <div class="product-mat"><div class="product-viewport"><a class="image-preview-trigger" href={heroPreview.src} data-image-preview={site.hero.compactCaption} aria-label={site.hero.compactCaption + "，" + site.editorial.viewLarge}><Image src={conversationScreen} alt={site.hero.screenshotAlt} format="webp" quality={90} widths={[640, 960, 1220]} sizes="(max-width: 800px) 90vw, 846px" fetchpriority="high" loading="eager" /></a></div></div>
             <figcaption><span>{site.hero.compactCaption}</span><button class="ambient-toggle" type="button" aria-label={site.hero.motionLabel} aria-pressed="false" data-pause-label={site.hero.pauseMotion} data-resume-label={site.hero.resumeMotion} hidden>{site.hero.pauseMotion}</button></figcaption>
           </figure></div>
       </div>

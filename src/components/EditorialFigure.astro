@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { site } from '../content/site';
 
@@ -9,13 +9,14 @@ interface Props {
   content: { alt: string; caption: string; summary: string; points: readonly string[] };
 }
 const { id, image, content } = Astro.props;
+const preview = await getImage({ src: image, format: 'webp', width: 1672, quality: 85 });
 ---
 <figure class="editorial-figure" id={id}>
-  <a class="image-preview-trigger" href={image.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}><Image src={image} alt={content.alt} format="webp" quality={85}
+  <a class="image-preview-trigger" href={preview.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}><Image src={image} alt={content.alt} format="webp" quality={85}
     widths={[640, 1024, 1672]} sizes="(max-width: 800px) 100vw, (max-width: 1440px) 90vw, 1280px"
     loading="lazy" decoding="async" /></a>
   <figcaption>
-    <div class="caption-row"><p class="art-caption">{content.caption}</p><a href={image.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}>{site.editorial.viewLarge}<span aria-hidden="true"> ↗</span></a></div>
+    <div class="caption-row"><p class="art-caption">{content.caption}</p><a href={preview.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}>{site.editorial.viewLarge}<span aria-hidden="true"> ↗</span></a></div>
     <details><summary>{site.editorial.textVersion}</summary><p class="art-summary">{content.summary}</p><ul>{content.points.map(point => <li>{point}</li>)}</ul></details>
   </figcaption>
 </figure>

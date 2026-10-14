@@ -1,5 +1,6 @@
 ---
 import { site } from '../content/site';
+import { getImage } from 'astro:assets';
 import screenshot from '../assets/product/conversation-starleap-06aec578.png';
 import '../styles/tokens.css';
 import '../styles/global.css';
@@ -8,7 +9,8 @@ import '../styles/optical.css';
 
 const origin = Astro.site!;
 const canonical = new URL(Astro.url.pathname, origin);
-const imageUrl = new URL(screenshot.src, origin);
+const ogImage = await getImage({ src: screenshot, format: 'webp', width: 1220, quality: 90 });
+const imageUrl = new URL(ogImage.src, origin);
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -56,8 +58,8 @@ const structuredData = {
     <meta property="og:locale" content={site.seo.ogLocale} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content={String(screenshot.width)} />
-    <meta property="og:image:height" content={String(screenshot.height)} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height)} />
     <meta property="og:image:alt" content={site.seo.imageAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
   </head>
