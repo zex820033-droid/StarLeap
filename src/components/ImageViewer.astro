@@ -1,0 +1,50 @@
+---
+import { site } from '../content/site';
+const copy = site.viewer;
+---
+<dialog class="image-viewer" aria-labelledby="viewer-title" aria-describedby="viewer-hint">
+  <div class="viewer-shell">
+    <header class="viewer-toolbar">
+      <h2 id="viewer-title"></h2>
+      <div class="viewer-actions">
+        <button type="button" data-viewer-zoom aria-pressed="false" data-zoom={copy.zoom} data-fit={copy.fit}>{copy.zoom}</button>
+        <a data-viewer-original target="_blank" rel="noopener">{copy.original}</a>
+        <button type="button" data-viewer-close autofocus>{copy.close}<span aria-hidden="true"> ×</span></button>
+      </div>
+    </header>
+    <div class="viewer-canvas" tabindex="0" aria-label={copy.region}><img class="viewer-image" alt="" /><p class="viewer-status" role="status" data-loading={copy.loading} data-error={copy.error}></p></div>
+    <p id="viewer-hint">{copy.hint}</p>
+  </div>
+</dialog>
+<script>
+  import '../scripts/image-viewer';
+</script>
+<style>
+  .image-viewer { width: min(1400px, calc(100vw - 48px)); height: min(960px, calc(100dvh - 48px)); max-width: none; max-height: none; padding: 0; margin: auto; color: var(--color-ink); background: var(--color-surface); border: 1px solid var(--color-dark-border); border-radius: 12px; overflow: hidden; }
+  .image-viewer::backdrop { background: var(--color-hero); opacity: .96; }
+  .viewer-shell { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+  .viewer-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding: 12px 24px; border-bottom: 1px solid var(--color-border); }
+  .viewer-toolbar h2 { font-size: 16px; letter-spacing: 0; }
+  .viewer-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .viewer-actions button, .viewer-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 12px; color: var(--color-gold); background: var(--color-surface); border-radius: 6px; font-size: 14px; }
+  .viewer-actions :is(button,a):hover { background: var(--color-soft); }
+  .viewer-actions [data-viewer-close] { border: 1px solid var(--color-rim); gap: 12px; }
+  .viewer-canvas { position: relative; overflow: auto; padding: 24px; background: var(--color-hero); overscroll-behavior: contain; }
+  .viewer-image { width: 100%; height: 100%; object-fit: contain; }
+  .image-viewer[data-zoomed] .viewer-image { width: auto; height: auto; max-width: none; margin-inline: auto; }
+  .viewer-status { color: var(--color-muted); text-align: center; }
+  .viewer-status:empty { display: none; }
+  .viewer-image:not([src]) { display: none; }
+  #viewer-hint { padding: 10px 24px; font-size: 13px; color: var(--color-muted); border-top: 1px solid var(--color-border); }
+  :global(html[data-image-viewer-open]) { overflow: hidden; }
+  :global(a.image-preview-trigger) { display: block; width: 100%; min-height: 0; padding: 0; cursor: zoom-in; }
+  @media (max-width: 600px) {
+    .image-viewer { width: calc(100vw - 16px); height: calc(100dvh - 16px); border-radius: 8px; }
+    .viewer-toolbar { padding: 12px; gap: 8px; }
+    .viewer-toolbar h2 { width: 100%; font-size: 14px; }
+    .viewer-actions { width: 100%; justify-content: space-between; gap: 0; }
+    .viewer-actions button, .viewer-actions a { padding-inline: 10px; }
+    .viewer-canvas { padding: 12px; }
+    #viewer-hint { padding: 10px 12px; }
+  }
+</style>

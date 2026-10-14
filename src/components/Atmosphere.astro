@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import atmosphere from '../assets/atmosphere/purple-gold.png';
+interface Props { prominent?: boolean; }
+const { prominent = false } = Astro.props;
+---
+<div class="ambient-field" aria-hidden="true">
+<Image class:list={['ambient-art', { 'ambient-art-prominent': prominent }]}
+  src={atmosphere} alt="" aria-hidden="true" format="webp" quality={82}
+  widths={[800, 1672]} sizes="100vw" loading={prominent ? 'eager' : 'lazy'} decoding="async" />
+</div>

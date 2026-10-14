@@ -1,0 +1,39 @@
+---
+import { site } from '../content/site';
+import Arrow from './Arrow.astro';
+const copy = site.lead;
+---
+<div class="lead-panel">
+  <form id="lead-form" action="#apply" novalidate>
+    <div class="field">
+      <label for="email">{copy.email.label}<span class="field-hint">{copy.email.required}</span></label>
+      <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" inputmode="email" placeholder={copy.email.placeholder} aria-describedby="email-error" data-invalid-message={copy.email.invalid} data-length-message={copy.email.tooLong} />
+      <p id="email-error" class="field-error" aria-live="polite"></p>
+    </div>
+    <details class="more-details form-extra"><summary>{copy.optionalDetails}</summary><div class="form-row">
+      <div class="field">
+        <label for="occupation">{copy.occupation.label}<span class="field-hint">{copy.occupation.optional}</span></label>
+        <input type="text" id="occupation" name="occupation" maxlength="120" autocomplete="organization-title" placeholder={copy.occupation.placeholder} />
+      </div>
+      <div class="field">
+        <label for="team">{copy.team.label}<span class="field-hint">{copy.team.optional}</span></label>
+        <select id="team" name="team">
+          {copy.team.options.map(option => <option value={option.value}>{option.label}</option>)}
+        </select>
+      </div>
+    </div>
+    </details>
+    <button class="button button-primary form-submit" type="submit" disabled>{copy.submit}<Arrow /></button>
+    <p class="form-note">{copy.submitNote}</p>
+    <noscript><p class="form-note">{copy.noScript}</p></noscript>
+  </form>
+  <div id="lead-success" class="lead-success" hidden tabindex="-1" role="status" aria-live="polite">
+    <span class="success-check" aria-hidden="true">✓</span>
+    <h3>{copy.successTitle}</h3>
+    <p>{copy.successBody}</p>
+    <button class="button button-secondary" id="lead-reset" type="button">{copy.retry}<Arrow /></button>
+  </div>
+</div>
+<script>
+  import '../scripts/lead-form';
+</script>

@@ -1,0 +1,86 @@
+/* Visible by default. Timelines and observers only enhance this baseline. */
+.hero-depth { display: none; }
+.hero-evidence { width: 100%; }
+.feature-heading { max-width: 48rem; margin-block: var(--space-8) var(--space-4); }
+.evidence-grid { gap: var(--space-20); }
+.pain-card, .audience-grid article, .local-card, .platform-grid article { transition: transform var(--duration-fast) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .pain-card:hover, .audience-grid article:hover, .local-card:hover, .platform-grid article:hover { transform: translateY(-4px); }
+}
+
+/* The layout is static until the observer is successfully installed. */
+.walkthrough { position: relative; display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: start; gap: var(--space-16); margin-top: var(--space-12); }
+.walkthrough-visual { position: relative; isolation: isolate; width: min(100%, 36rem); margin-inline: auto; }
+.walkthrough-depth { position: absolute; inset: var(--space-6) calc(-1 * var(--space-3)) var(--space-8); background: var(--color-soft); border-radius: var(--radius-lg); z-index: -1; }
+.walkthrough-screen { overflow: hidden; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.walkthrough-screen img { width: 100%; }
+.walkthrough-visual figcaption { font-size: var(--text-xs); color: var(--color-muted); padding-block: var(--space-3); }
+.walkthrough-detail { display: grid; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4); }
+.walkthrough-panel { grid-area: 1 / 1; display: flex; align-items: center; gap: var(--space-4); opacity: 0; transform: translateY(12px); }
+.walkthrough-panel[data-panel="0"] { opacity: 1; transform: none; }
+.walkthrough-panel .step-visual { width: 34%; max-width: 9rem; color: var(--color-primary); }
+.diagram-paper { fill: var(--color-bg); }
+.diagram-tint { fill: var(--color-primary-soft); }
+.diagram-muted { stroke: var(--color-input-border); }
+.walkthrough-panel p { font-weight: 600; font-size: var(--text-md); }
+.walkthrough-number { color: var(--color-primary); font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+.walkthrough-progress { display: flex; gap: var(--space-2); margin-top: var(--space-5); }
+.walkthrough-progress span { position: relative; height: 3px; flex: 1; background: var(--color-border); }
+.walkthrough-progress span::after { content: ""; position: absolute; inset: 0; background: var(--color-primary); transform: scaleX(0); transform-origin: left; }
+.walkthrough-visual[data-phase="0"] [data-progress="0"]::after { transform: scaleX(1); }
+.walkthrough-beats.steps { display: flex; flex-direction: column; gap: var(--space-10); }
+.walkthrough-beats.steps li { display: block; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-border); }
+.walkthrough-beats.steps h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.35; letter-spacing: -0.025em; }
+.walkthrough-beats.steps p { margin-top: var(--space-4); font-size: var(--text-md); }
+
+@keyframes enter-copy { from { opacity: 0.55; transform: translateY(var(--motion-rise)); } to { opacity: 1; transform: none; } }
+/* A single damped settling curve; no repeated oscillation. */
+@keyframes enter-product { from { opacity: 0.6; transform: translateY(var(--motion-product-rise)) scale(0.94); } 78% { opacity: 1; transform: translateY(-2px) scale(1.002); } to { opacity: 1; transform: none; } }
+@keyframes depth-back { from { transform: none; } to { transform: translateY(var(--motion-background)); } }
+@keyframes depth-front { from { transform: none; } to { transform: translateY(var(--motion-foreground)); } }
+@keyframes section-enter { from { opacity: 0.6; transform: translateY(var(--motion-rise)); } to { opacity: 1; transform: none; } }
+@keyframes focus-enter { from { transform: scale(0.985); } to { transform: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: enter-copy var(--duration-enter) var(--ease-out) backwards; animation-delay: calc(var(--reveal-i, 0) * var(--stagger-step)); }
+  .hero-copy > :nth-child(2) { --reveal-i: 1; }
+  .hero-copy > :nth-child(3) { --reveal-i: 2; }
+  .hero-copy > :nth-child(4) { --reveal-i: 3; }
+  .hero-copy > :nth-child(5) { --reveal-i: 4; }
+  .hero-product { animation: enter-product var(--duration-product) var(--ease-settle) 180ms backwards; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { animation: focus-enter var(--duration-fast) var(--ease-out); }
+  /* The outline is visible immediately; only its associated control settles. */
+  .hero-copy:focus-within { opacity: 1 !important; transform: none !important; }
+  .walkthrough-panel { transition: opacity var(--duration-swap) var(--ease-out), transform var(--duration-swap) var(--ease-out); }
+  .walkthrough-progress span::after { transition: transform var(--duration-swap) var(--ease-out); }
+  .walkthrough-visual[data-phase] .walkthrough-panel { opacity: 0; transform: translateY(12px); }
+  .walkthrough-visual[data-phase="0"] [data-panel="0"], .walkthrough-visual[data-phase="1"] [data-panel="1"], .walkthrough-visual[data-phase="2"] [data-panel="2"] { opacity: 1; transform: none; }
+  .walkthrough-visual[data-phase="1"] [data-progress="0"]::after, .walkthrough-visual[data-phase="1"] [data-progress="1"]::after, .walkthrough-visual[data-phase="2"] [data-progress]::after { transform: scaleX(1); }
+  .walkthrough-screen { transition: transform var(--duration-enter) var(--ease-out); }
+  .walkthrough-visual[data-phase="1"] .walkthrough-screen { transform: translateY(-4px) scale(0.99); }
+  .walkthrough-visual[data-phase="2"] .walkthrough-screen { transform: translateY(-8px) scale(0.98); }
+  @media (min-width: 801px) and (min-height: 720px) {
+    .walkthrough-visual { position: sticky; top: var(--walkthrough-top); }
+    .walkthrough-beats.steps { gap: 0; }
+    .walkthrough-beats.steps li { min-height: var(--walkthrough-beat); display: flex; flex-direction: column; justify-content: center; }
+  }
+
+}
+
+@media (max-width: 800px), (max-height: 719px) {
+  .walkthrough { grid-template-columns: 1fr; gap: var(--space-8); }
+  .walkthrough-visual { width: min(100%, 40rem); margin-inline: auto; }
+  .walkthrough-detail, .walkthrough-progress { display: none; }
+  .walkthrough-depth { inset-inline: 0; }
+  .walkthrough-beats.steps { gap: var(--space-4); }
+  .walkthrough-beats.steps li { padding-block: var(--space-5); border-top: 1px solid var(--color-border); }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Cancel timelines and runtime transforms, including a preference change. */
+  .hero-copy, .hero-copy > *, .hero-product, .hero-product-stage, .hero-depth, .hero-evidence,
+  [data-reveal] > *, .walkthrough-screen, .walkthrough-depth, .walkthrough-detail,
+  .pain-card:hover, .audience-grid article:hover, .local-card:hover, .platform-grid article:hover { opacity: 1 !important; transform: none !important; }
+  .walkthrough-visual { position: relative; top: auto; }
+  .walkthrough-detail, .walkthrough-progress { display: none; }
+  .walkthrough-beats.steps li { min-height: 0; }
+}

@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { site } from '../content/site';
+
+interface Props {
+  id: string;
+  image: ImageMetadata;
+  content: { alt: string; caption: string; summary: string; points: readonly string[] };
+}
+const { id, image, content } = Astro.props;
+---
+<figure class="editorial-figure" id={id}>
+  <a class="image-preview-trigger" href={image.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}><Image src={image} alt={content.alt} format="webp" quality={85}
+    widths={[640, 1024, 1672]} sizes="(max-width: 800px) 100vw, (max-width: 1440px) 90vw, 1280px"
+    loading="lazy" decoding="async" /></a>
+  <figcaption>
+    <div class="caption-row"><p class="art-caption">{content.caption}</p><a href={image.src} data-image-preview={content.caption} aria-label={`${content.caption}，${site.editorial.viewLarge}`}>{site.editorial.viewLarge}<span aria-hidden="true"> ↗</span></a></div>
+    <details><summary>{site.editorial.textVersion}</summary><p class="art-summary">{content.summary}</p><ul>{content.points.map(point => <li>{point}</li>)}</ul></details>
+  </figcaption>
+</figure>
+<style>
+  .editorial-figure { min-width: 0; margin: 32px 0 0; scroll-margin-top: 100px; }
+  .image-preview-trigger img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--color-rim); }
+  figcaption { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 0 40px; padding: 20px 0 0; }
+  .caption-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .art-caption { font-size: 14px; color: var(--color-gold); }
+  .caption-row a { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; color: var(--color-primary); font-size: 14px; text-underline-offset: 4px; }
+  .art-summary { font-size: 16px; line-height: 1.8; color: var(--color-ink); }
+  details { margin-top: 0; }
+  details[open] { grid-column: 1 / -1; }
+  .art-summary { margin: 0 0 16px; }
+  summary { cursor: pointer; padding: 14px 0; color: var(--color-muted); font-size: 14px; }
+  ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; margin: 0; padding: 0 0 16px 20px; }
+  li { color: var(--color-muted); font-size: 15px; line-height: 1.8; }
+  @media (max-width: 800px) { figcaption { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-top: 12px; } }
+  @media (max-width: 540px) {
+    .editorial-figure { margin-top: 24px; }
+    .image-preview-trigger img { border-radius: 6px; }
+    .caption-row { gap: 8px; }
+    .art-caption, .caption-row a { font-size: 13px; }
+    ul { grid-template-columns: 1fr; }
+  }
+</style>

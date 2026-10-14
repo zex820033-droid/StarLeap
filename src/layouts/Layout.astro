@@ -1,0 +1,68 @@
+---
+import { site } from '../content/site';
+import screenshot from '../assets/product/conversation-starleap-06aec578.png';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/motion.css';
+import '../styles/optical.css';
+
+const origin = Astro.site!;
+const canonical = new URL(Astro.url.pathname, origin);
+const imageUrl = new URL(screenshot.src, origin);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication', '@id': new URL('#software', origin).href,
+      name: `${site.brand.name} ${site.brand.latin}`,
+      description: site.hero.subtitle,
+      applicationCategory: site.seo.applicationCategory,
+      operatingSystem: site.seo.operatingSystem,
+      url: canonical.href, image: imageUrl.href,
+      inLanguage: site.locale,
+      publisher: { '@id': new URL('#organization', origin).href },
+    },
+    {
+      '@type': 'FAQPage', '@id': new URL('#faq', origin).href,
+      inLanguage: site.locale,
+      mainEntity: site.faq.items.map((item) => ({
+        '@type': 'Question', name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+    {
+      '@type': 'Organization', '@id': new URL('#organization', origin).href,
+      name: site.seo.organizationName, url: canonical.href,
+      logo: new URL('/favicon.svg', origin).href,
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.seo.title}</title>
+    <meta name="description" content={site.seo.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={site.seo.title} />
+    <meta property="og:description" content={site.seo.description} />
+    <meta property="og:site_name" content={`${site.brand.name} ${site.brand.latin}`} />
+    <meta property="og:locale" content={site.seo.ogLocale} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={String(screenshot.width)} />
+    <meta property="og:image:height" content={String(screenshot.height)} />
+    <meta property="og:image:alt" content={site.seo.imageAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{site.nav.skip}</a>
+    <slot />
+  </body>
+</html>

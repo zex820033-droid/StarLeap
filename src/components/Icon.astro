@@ -1,0 +1,8 @@
+---
+interface Props { name: string; size?: number; class?: string; }
+const { name, size = 24, class: className = '' } = Astro.props;
+---
+<span class:list={['icon', className]} style={`width:${size}px;height:${size}px;--icon-source:url('/icons/phosphor/${name}.svg')`} aria-hidden="true"></span>
+<style>
+  .icon { background-color: currentColor; mask: var(--icon-source) center / contain no-repeat; }
+</style>

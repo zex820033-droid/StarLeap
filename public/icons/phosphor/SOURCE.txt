@@ -1,0 +1,3 @@
+Phosphor Icons, regular style. MIT License.
+Source: https://github.com/phosphor-icons/core/tree/main/assets/regular
+Retrieved 2026-10-10. Blue variants only change the SVG fill color.

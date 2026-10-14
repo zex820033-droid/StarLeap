@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import ProductScreen from '../components/ProductScreen.astro';
+import generalScreen from '../assets/product/general-mode-starleap-6c1e201d.png';
+import customerScreen from '../assets/product/customer-records-starleap-c53b8774.png';
+import Layout from '../layouts/Layout.astro';
+import ImageViewer from '../components/ImageViewer.astro';
+import Atmosphere from '../components/Atmosphere.astro';
+import Mark from '../components/Mark.astro';
+import Arrow from '../components/Arrow.astro';
+import Icon from '../components/Icon.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { Content as WritebackPreview } from '../components/WritebackPreview.mdx';
+import screenshot from '../assets/smoke.png';
+import conversationScreen from '../assets/product/conversation-starleap-06aec578.png';
+import settingsScreen from '../assets/product/settings-starleap-cbb92e32.png';
+import knowledgeScreen from '../assets/product/knowledge-library-starleap-ebb6c552.png';
+import EditorialFigure from '../components/EditorialFigure.astro';
+import salesScenario from '../assets/editorial/sales-scenario.png';
+import salesChallenges from '../assets/editorial/sales-challenges.png';
+import experienceMap from '../assets/editorial/experience-map.png';
+import { site } from '../content/site';
+---
+<Layout>
+  <header class="site-header">
+    <nav class="container nav" aria-label={site.nav.label}>
+      <a class="brand" href="#top" aria-label={site.brand.homeLabel}><Mark /><span>{site.brand.name}<span class="brand-latin">{site.brand.latin}</span></span></a>
+      <div class="nav-links">{site.nav.links.map(link => <a href={link.href}>{link.label}</a>)}</div>
+      <a class="button button-primary nav-cta" href="#apply">{site.cta.primary}<Arrow /></a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero atmospheric" aria-labelledby="hero-heading">
+      <Atmosphere prominent />
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 id="hero-heading" aria-label={site.hero.headline}>{site.hero.headline.split('，')[0]}，<span>{site.hero.headline.split('，')[1]}</span></h1>
+          <div class="hero-details"><p class="hero-subtitle">{site.hero.subtitle}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#apply">{site.cta.primary}<Arrow /></a>
+            <a class="button button-secondary" href="#demo">{site.cta.secondary}<Arrow /></a>
+          </div>
+          </div>
+        </div>
+          <div class="hero-product-stage"><figure class="hero-product">
+            <div class="product-frame-heading"><span>{site.hero.previewTitle}</span><a href={conversationScreen.src} data-image-preview={site.hero.compactCaption}>{site.hero.originalImage}<Arrow /></a></div>
+            <div class="product-mat"><div class="product-viewport"><a class="image-preview-trigger" href={conversationScreen.src} data-image-preview={site.hero.compactCaption} aria-label={site.hero.compactCaption + "，" + site.editorial.viewLarge}><Image src={conversationScreen} alt={site.hero.screenshotAlt} format="webp" quality={90} widths={[640, 960, 1220]} sizes="(max-width: 800px) 90vw, 846px" fetchpriority="high" loading="eager" /></a></div></div>
+            <figcaption><span>{site.hero.compactCaption}</span><button class="ambient-toggle" type="button" aria-label={site.hero.motionLabel} aria-pressed="false" data-pause-label={site.hero.pauseMotion} data-resume-label={site.hero.resumeMotion} hidden>{site.hero.pauseMotion}</button></figcaption>
+          </figure></div>
+      </div>
+    </section>
+    <div class="trust-strip" aria-label={site.showcase.trustLabel}><ul class="container">{site.showcase.trustItems.map((label, index) => <li><Icon name={["cube", "hard-drives", "key", "flask"][index]!} size={28} />{label}</li>)}</ul></div>
+
+    <section class="pain-section section atmospheric" aria-labelledby="pain-heading">
+      <Atmosphere />
+      <div class="container">
+        <div class="pain-heading">
+        <h2 id="pain-heading" data-emphasis>{site.pain.heading.split('，')[0]}，<span>{site.pain.heading.split('，')[1]}</span></h2></div>
+        <EditorialFigure id="sales-challenges" image={salesChallenges} content={site.editorial.challenges} />
+      </div>
+    </section>
+
+    <div class="feature-atmosphere atmospheric"><Atmosphere />
+    <div class="feature-showcase container">
+      <div class="evidence-grid">
+    <section class="evidence-section how-card" id="how-it-works" aria-labelledby="how-heading">
+      <div class="section-heading" data-reveal><h2 id="how-heading">{site.how.heading}</h2></div>
+      <ol class="quick-steps" role="list">{site.how.steps.map(step => <li data-reveal><span class="quick-step-number" aria-hidden="true">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
+      <details class="more-details"><summary>{site.how.detailsLabel}</summary><figure class="product-screenshot"><a class="image-preview-trigger" href={screenshot.src} data-image-preview={site.how.visualLabel} aria-label={site.how.visualLabel + '，' + site.editorial.viewLarge}><img src={screenshot.src} width={screenshot.width} height={screenshot.height} alt={site.how.screenshotAlt} loading="lazy" /></a><figcaption>{site.how.visualLabel}</figcaption></figure></details>
+    </section>
+
+    <nav class="capability-nav" aria-label={site.capabilities.navLabel}>{site.capabilities.links.map(link => <a href={link.href}>{link.label}<Arrow /></a>)}</nav>
+
+    <section class="demo-section evidence-section" id="demo" aria-labelledby="demo-heading">
+      <div>
+        <div class="section-heading" data-reveal><h2 id="demo-heading">{site.demo.heading}</h2></div>
+        <div class="demo-grid demo-text-only" data-reveal>
+          <div class="conversation">
+            <p class="demo-label">{site.demo.label}</p>
+            <div class="question"><p class="speaker">{site.demo.questionLabel}</p><p>{site.demo.question}</p></div>
+            <div class="answer"><p class="speaker">{site.demo.answerLabel}</p><blockquote>{site.demo.quote}</blockquote><a class="citation" href="#citation-source" aria-label={site.demo.citationLabel}>{site.demo.citation}<Arrow /></a></div>
+            <details class="citation-source" id="citation-source"><summary>{site.demo.sourceTitle}</summary><p>{site.demo.sourceText}</p><p class="muted small">{site.demo.sourceNote}</p></details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="evidence-section capability-section" id="general-mode" aria-labelledby="general-heading">
+      <div class="capability-copy"><h2 id="general-heading">{site.capabilities.general.heading}</h2><p class="section-intro">{site.capabilities.general.intro}</p><ul class="capability-points" aria-label={site.capabilities.general.heading}>{site.capabilities.general.items.map(item => <li>{item}</li>)}</ul><details class="more-details"><summary>{site.capabilities.general.detailsLabel}</summary><p>{site.capabilities.general.details}</p></details></div>
+      <ProductScreen image={generalScreen} alt={site.capabilities.general.alt} caption={site.capabilities.general.caption} />
+    </section>
+
+    <section class="evidence-section capability-section capability-section-reverse" id="customer-records" aria-labelledby="customer-heading">
+      <div class="capability-copy"><h2 id="customer-heading">{site.capabilities.customers.heading}</h2><p class="section-intro">{site.capabilities.customers.intro}</p><ul class="capability-points" aria-label={site.capabilities.customers.heading}>{site.capabilities.customers.items.map(item => <li>{item}</li>)}</ul><details class="more-details"><summary>{site.capabilities.customers.detailsLabel}</summary><p>{site.capabilities.customers.details}</p></details></div>
+      <ProductScreen image={customerScreen} alt={site.capabilities.customers.alt} caption={site.capabilities.customers.caption} />
+    </section>
+
+    <section class="evidence-section docs-section" id="features" aria-labelledby="docs-heading" data-reveal>
+      <div><h2 id="docs-heading">{site.docs.heading}</h2><p class="section-intro">{site.docs.intro}</p><details class="more-details"><summary>{site.docs.detailsLabel}</summary><ul class="formats" aria-label={site.docs.formatsLabel}>{site.docs.formats.map(format => <li>{format}</li>)}<li class="ocr-format">{site.docs.ocr}</li></ul><div class="import-rules">{site.docs.rules.map(rule => <div><h3><span aria-hidden="true">✓</span>{rule.title}</h3><p>{rule.body}</p></div>)}</div></details></div>
+      <ProductScreen id="knowledge-library" image={knowledgeScreen} alt={site.docs.screenshotAlt} caption={site.docs.screenshotCaption} />
+    </section>
+
+    <section class="writeback-section evidence-section" id="writeback" aria-labelledby="writeback-heading">
+      <div class="section-heading" data-reveal><h2 id="writeback-heading">{site.writeback.heading}</h2><p class="section-intro">{site.writeback.intro}</p></div>
+      <EditorialFigure id="experience-map" image={experienceMap} content={site.editorial.experience} />
+      <details class="more-details"><summary>{site.writeback.detailsLabel}</summary><WritebackPreview /></details>
+    </section>
+
+
+      </div>
+    </div>
+
+    </div>
+    <div class="dark-band">
+    <section class="privacy-section section atmospheric" id="privacy" aria-labelledby="privacy-heading">
+      <Atmosphere />
+      <div class="container"><div class="section-heading" data-reveal><h2 id="privacy-heading" data-emphasis>{site.privacy.heading}</h2><p>{site.privacy.intro}</p></div><div class="privacy-diagram" data-reveal><div class="local-boundary"><span class="boundary-label">{site.privacy.boundary}</span>{site.privacy.nodes.slice(0,2).map((node,index) => <><div class="privacy-node"><h3>{node.title}</h3><p>{node.detail}</p></div>{index === 0 && <Arrow />}</>)}</div><div class="outbound-arrow"><span>{site.privacy.remote}</span><Arrow /></div><div class="privacy-node remote-node"><h3>{site.privacy.nodes[2].title}</h3><p>{site.privacy.nodes[2].detail}</p></div></div><p class="privacy-mode-note">{site.privacy.generalNotice}</p><details class="more-details privacy-details"><summary>{site.privacy.detailsLabel}</summary><ul class="privacy-rules">{site.privacy.rules.map(rule => <li><span aria-hidden="true">✓</span>{rule}</li>)}</ul><ProductScreen id="ai-settings" image={settingsScreen} alt={site.showcase.settingsAlt} caption={site.showcase.settingsCaption} /></details></div>
+    </section>
+
+    <section class="trust-section section container" aria-labelledby="trust-heading" data-reveal>
+      <div class="trust-heading"><h2 id="trust-heading">{site.trust.heading}</h2><p>{site.trust.summary}</p></div>
+      <details class="more-details"><summary>{site.trust.detailsLabel}</summary><p class="section-intro">{site.trust.intro}</p><p class="trust-condition">{site.trust.condition}</p>
+      <div class="platform-grid">{site.trust.platforms.map(platform => <article><h3>{platform.name}</h3><ol>{platform.steps.map(step => <li>{step}</li>)}</ol></article>)}</div>
+      <div class="hash-block"><div><h3>{site.trust.hashTitle}</h3><p>{site.trust.hashBody}</p></div><div class="hash-commands">{site.trust.commands.map(command => <div><p>{command.label}</p><pre><code>{command.value}</code></pre></div>)}</div><p class="hash-pending">{site.trust.hashPending}</p></div></details>
+    </section>
+
+    </div>
+
+    <section class="audience-section section atmospheric" id="audience" aria-labelledby="audience-heading">
+      <Atmosphere />
+      <div class="container" data-reveal><h2 id="audience-heading">{site.audience.heading}</h2><EditorialFigure id="sales-scenario" image={salesScenario} content={site.editorial.scenario} /><div class="audience-grid" data-reveal>{site.audience.items.map(item => <article><h3>{item.title}</h3></article>)}</div><div class="faq-layout" id="faq" data-reveal><h2 id="faq-heading">{site.faq.heading}</h2><div class="faq-list" aria-labelledby="faq-heading">{site.faq.items.map(item => <details><summary>{item.question}<span class="faq-plus" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></div></div>
+    </section>
+
+    <div class="atmospheric lead-atmosphere"><Atmosphere />
+    <section class="lead-section section container" id="apply" aria-labelledby="lead-heading" data-reveal>
+      <div class="lead-copy"><h2 id="lead-heading">{site.lead.heading}</h2></div><LeadForm />
+    </section>
+    </div>
+  </main>
+  <ImageViewer />
+
+  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="#top" aria-label={site.brand.homeLabel}><Mark /><span>{site.brand.name}<span class="brand-latin">{site.brand.latin}</span></span></a><p>{site.footer.tagline}</p></div></div><div class="footer-bottom"><p>{site.footer.copyright}</p></div></div></footer>
+<script>
+  import '../scripts/motion';
+  import '../scripts/ambient-motion';
+  // A citation reveals the local example chapter; it never opens an external app.
+  document.querySelector<HTMLAnchorElement>('.citation')?.addEventListener('click', event => {
+    const source = document.querySelector<HTMLDetailsElement>('#citation-source');
+    if (source) {
+      event.preventDefault();
+      source.open = true;
+      if (location.hash !== '#citation-source') history.pushState(null, '', '#citation-source');
+      source.scrollIntoView({ block: 'start' });
+      source.querySelector('summary')?.focus({ preventScroll: true });
+    }
+  });
+  // Reflect the section being read without changing focus or the URL.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.nav-links a')];
+  const sections = links.map(link => document.querySelector<HTMLElement>(link.hash)).filter((section): section is HTMLElement => !!section);
+  if ('IntersectionObserver' in window) {
+    const visible = new Set<string>();
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      }
+      const current = sections.find(section => visible.has(section.id));
+      for (const link of links) {
+        if (current && link.hash === `#${current.id}`) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    }, { rootMargin: '-20% 0px -50% 0px' });
+    sections.forEach(section => observer.observe(section));
+  }
+</script>
+</Layout>

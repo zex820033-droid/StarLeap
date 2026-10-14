@@ -1,0 +1,9 @@
+import { site } from '../content/site';
+
+<figure className="diff-preview" aria-label={site.writeback.previewLabel}>
+  <figcaption className="diff-heading"><span className="file-dot" aria-hidden="true" />{site.writeback.filename}</figcaption>
+  <div className="diff-line diff-unchanged"><span aria-hidden="true">#</span><span>{site.writeback.unchanged}</span></div>
+  <div className="diff-line diff-removed"><span aria-hidden="true">−</span><div><span className="diff-label">{site.writeback.removedLabel}</span><p>{site.writeback.removed}</p></div></div>
+  <div className="diff-line diff-added"><span aria-hidden="true">+</span><div><span className="diff-label">{site.writeback.addedLabel}</span><p>{site.writeback.added}</p><p>{site.writeback.addedSecond}</p></div></div>
+  <p className="diff-note">{site.writeback.previewNote}</p>
+</figure>

@@ -1,0 +1,27 @@
+---
+interface Props { index: number }
+const { index } = Astro.props;
+---
+<svg class="step-visual" viewBox="0 0 240 112" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  {index === 0 && <>
+    <rect x="44" y="23" width="56" height="70" rx="6" class="diagram-muted" />
+    <rect x="54" y="17" width="56" height="70" rx="6" class="diagram-muted" />
+    <path d="M70 25h28l14 14v40a6 6 0 0 1-6 6H70a6 6 0 0 1-6-6V31a6 6 0 0 1 6-6Z" class="diagram-paper" />
+    <path d="M98 25v14h14M77 50h22M77 60h22M77 70h14M130 55h26m-6-6 6 6-6 6" />
+    <rect x="170" y="34" width="36" height="42" rx="6" class="diagram-tint" />
+    <path d="M180 44h16M180 53h16M180 62h8" />
+  </>}
+  {index === 1 && <>
+    <rect x="51" y="22" width="138" height="70" rx="8" class="diagram-paper" />
+    <path d="M51 39h138" class="diagram-muted" />
+    <circle cx="64" cy="31" r="2" fill="currentColor" stroke="none" />
+    <path d="M74 31h26" />
+    {[51, 66, 81].map(y => <><rect x="65" y={y-4} width="8" height="8" rx="2" class="diagram-tint" /><path d={`M84 ${y}h58M154 ${y}h20`} class="diagram-muted" /></>)}
+  </>}
+  {index === 2 && <>
+    <path d="M51 21h138a7 7 0 0 1 7 7v47a7 7 0 0 1-7 7H86L64 94V82H51a7 7 0 0 1-7-7V28a7 7 0 0 1 7-7Z" class="diagram-paper" />
+    <path d="M60 38h100M60 48h120" class="diagram-muted" />
+    <rect x="60" y="59" width="78" height="13" rx="4" class="diagram-tint" />
+    <path d="M68 65h41m12 0h8m-3-3 3 3-3 3" />
+  </>}
+</svg>

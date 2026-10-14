@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.pnpm-store/
+.pnpm-cache/
+.pnpm-state/
+.cache/
+# Local QA screenshots and logs: not part of the published site.
+review/
+.DS_Store
