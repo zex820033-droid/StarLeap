@@ -11,7 +11,6 @@ import Arrow from '../components/Arrow.astro';
 import Icon from '../components/Icon.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { Content as WritebackPreview } from '../components/WritebackPreview.mdx';
-import screenshot from '../assets/smoke.png';
 import conversationScreen from '../assets/product/conversation-starleap-06aec578.png';
 import settingsScreen from '../assets/product/settings-starleap-cbb92e32.png';
 import knowledgeScreen from '../assets/product/knowledge-library-starleap-ebb6c552.png';
@@ -71,7 +70,6 @@ const heroPreview = await getImage({ src: conversationScreen, format: 'webp', wi
     <section class="evidence-section how-card" id="how-it-works" aria-labelledby="how-heading">
       <div class="section-heading" data-reveal><h2 id="how-heading">{site.how.heading}</h2></div>
       <ol class="quick-steps" role="list">{site.how.steps.map(step => <li data-reveal><span class="quick-step-number" aria-hidden="true">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
-      <details class="more-details"><summary>{site.how.detailsLabel}</summary><figure class="product-screenshot"><a class="image-preview-trigger" href={screenshot.src} data-image-preview={site.how.visualLabel} aria-label={site.how.visualLabel + '，' + site.editorial.viewLarge}><img src={screenshot.src} width={screenshot.width} height={screenshot.height} alt={site.how.screenshotAlt} loading="lazy" /></a><figcaption>{site.how.visualLabel}</figcaption></figure></details>
     </section>
 
     <nav class="capability-nav" aria-label={site.capabilities.navLabel}>{site.capabilities.links.map(link => <a href={link.href}>{link.label}<Arrow /></a>)}</nav>
