@@ -235,7 +235,7 @@ PLAYWRIGHT_MODULE=/绝对路径/playwright/index.mjs CHROMIUM_PATH=/绝对路径
 
 ## 字体、素材与后端 TODO
 
-Plus Jakarta Sans Latin variable 字体自托管于 `public/fonts/plus-jakarta-sans-latin-variable.woff2`（27,348 bytes），保留 `public/fonts/OFL.txt`；font-display 为 optional，中文系统栈。现有真实截图 `src/assets/smoke.png`，两处展示均保留完整比例。
+Plus Jakarta Sans Latin variable 字体自托管于 `public/fonts/plus-jakarta-sans-latin-variable.woff2`（27,348 bytes），保留 `public/fonts/OFL.txt`；font-display 为 optional，中文系统栈。首启向导截图已按要求从首页移除。
 
 待补：真实 1 分钟视频及带引用的问答图／GIF；macOS / Windows 安装包、版本、最低系统要求、真实 SHA256；价格、组织正式信息、联系方式；留资后端接入方案。后端仍为显式 TODO，当前表单只校验并展示演示状态，不保存或发送信息。
 

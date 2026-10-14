@@ -100,10 +100,7 @@ export const site = {
   },
   how: {
     heading: '连接笔记，开口就问。',
-    detailsLabel: '查看连接界面',
     intro: '连上已有的笔记库，留住原有的整理习惯。',
-    visualLabel: '真实产品截图 · 连接笔记库',
-    screenshotAlt: '星跃首启向导，检测到 Obsidian 后可选择笔记库，也可手动选择',
     steps: [
       { number: '01', title: '连接笔记', body: '选择已有的 Obsidian 笔记库。' },
       { number: '02', title: '本地整理', body: '原笔记留在本机，随时可查。' },
