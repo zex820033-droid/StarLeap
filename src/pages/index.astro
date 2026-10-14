@@ -74,7 +74,7 @@ const heroPreview = await getImage({ src: conversationScreen, format: 'webp', wi
       <div class="evidence-grid">
     <section class="evidence-section how-card" id="how-it-works" aria-labelledby="how-heading">
       <div class="section-heading" data-reveal><h2 id="how-heading">{site.how.heading}</h2></div>
-      <ol class="quick-steps" role="list">{site.how.steps.map((step, index) => <li data-reveal><span class="quick-step-number" aria-hidden="true">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p><Image class="step-shot" src={stepImages[index]!} alt={step.imageAlt} format="webp" quality={82} widths={[440, 880]} sizes="(max-width: 800px) 90vw, 30vw" loading="lazy" decoding="async" /></div></li>)}</ol>
+      <ol class="quick-steps" role="list">{site.how.steps.map((step, index) => <li data-reveal><div class="quick-step-head"><span class="quick-step-number" aria-hidden="true">{step.number}</span><div class="quick-step-copy"><h3>{step.title}</h3><p>{step.body}</p></div></div><Image class="step-shot" src={stepImages[index]!} alt={step.imageAlt} format="webp" quality={82} widths={[640, 1280]} sizes="(max-width: 800px) 92vw, 1100px" loading="lazy" decoding="async" /></li>)}</ol>
     </section>
 
     <nav class="capability-nav" aria-label={site.capabilities.navLabel}>{site.capabilities.links.map(link => <a href={link.href}>{link.label}<Arrow /></a>)}</nav>
