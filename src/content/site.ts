@@ -102,9 +102,9 @@ export const site = {
     heading: '连接笔记，开口就问。',
     intro: '连上已有的笔记库，留住原有的整理习惯。',
     steps: [
-      { number: '01', title: '连接笔记', body: '选择已有的 Obsidian 笔记库。' },
-      { number: '02', title: '本地整理', body: '原笔记留在本机，随时可查。' },
-      { number: '03', title: '提问查出处', body: '围绕客户提问，回到原文核查。' },
+      { number: '01', title: '连接笔记', body: '选择已有的 Obsidian 笔记库。', imageAlt: '示意图：紫色水晶与悬浮笔记卡片，通过金色光线连到右侧的笔记库面板' },
+      { number: '02', title: '本地整理', body: '原笔记留在本机，随时可查。', imageAlt: '示意图：桌面显示器把散落的图文卡片整理成有序的笔记面板' },
+      { number: '03', title: '提问查出处', body: '围绕客户提问，回到原文核查。', imageAlt: '示意图：提问气泡与回答面板经金色光线指向一本可回查的笔记' },
     ],
   },
   demo: {

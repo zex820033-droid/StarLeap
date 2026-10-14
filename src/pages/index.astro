@@ -18,7 +18,12 @@ import EditorialFigure from '../components/EditorialFigure.astro';
 import salesScenario from '../assets/editorial/sales-scenario.png';
 import salesChallenges from '../assets/editorial/sales-challenges.png';
 import experienceMap from '../assets/editorial/experience-map.png';
+import stepConnectNotes from '../assets/steps/step-01-connect-notes.webp';
+import stepLocalOrganize from '../assets/steps/step-02-local-organize.webp';
+import stepAskSource from '../assets/steps/step-03-ask-source.webp';
 import { site } from '../content/site';
+
+const stepImages = [stepConnectNotes, stepLocalOrganize, stepAskSource];
 
 // Full-size preview opens the largest optimised WebP instead of the source PNG,
 // so the original multi-megabyte files stay out of the published bundle.
@@ -69,7 +74,7 @@ const heroPreview = await getImage({ src: conversationScreen, format: 'webp', wi
       <div class="evidence-grid">
     <section class="evidence-section how-card" id="how-it-works" aria-labelledby="how-heading">
       <div class="section-heading" data-reveal><h2 id="how-heading">{site.how.heading}</h2></div>
-      <ol class="quick-steps" role="list">{site.how.steps.map(step => <li data-reveal><span class="quick-step-number" aria-hidden="true">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
+      <ol class="quick-steps" role="list">{site.how.steps.map((step, index) => <li data-reveal><span class="quick-step-number" aria-hidden="true">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p><Image class="step-shot" src={stepImages[index]!} alt={step.imageAlt} format="webp" quality={82} widths={[440, 880]} sizes="(max-width: 800px) 90vw, 30vw" loading="lazy" decoding="async" /></div></li>)}</ol>
     </section>
 
     <nav class="capability-nav" aria-label={site.capabilities.navLabel}>{site.capabilities.links.map(link => <a href={link.href}>{link.label}<Arrow /></a>)}</nav>

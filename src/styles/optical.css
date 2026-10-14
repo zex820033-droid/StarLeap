@@ -247,6 +247,7 @@ input, select { caret-color: var(--color-gold); }
 .quick-step-number { flex-shrink: 0; color: var(--color-gold); font-size: 40px; line-height: 1; font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -.05em; }
 .quick-steps h3 { font-size: 22px; font-weight: 600; margin: 0 0 10px; }
 .quick-steps p { color: var(--color-muted); font-size: 15px; line-height: 1.8; max-width: 16em; }
+.quick-steps .step-shot { display: block; width: 100%; height: auto; margin-top: 20px; border-radius: 8px; border: 1px solid var(--color-rim); }
 .more-details { min-width: 0; margin-top: 24px; border-top: 1px solid var(--color-border); }
 .more-details > summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 56px; padding-block: 14px; list-style: none; cursor: pointer; color: var(--color-gold); font-size: 14px; }
 .more-details > summary::-webkit-details-marker { display: none; }
